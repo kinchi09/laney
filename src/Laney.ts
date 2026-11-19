@@ -36,8 +36,16 @@ export default class Laney {
    * @returns string
    */
   public getMessage(): string {
+    const word: Array<string> = ["", "", ""];
+    this.nextNumbers.forEach((number: LaneNumber, index: number) => {
+      if (this.nextNumbers[index].isSecret()) {
+        word[index] = "???";
+      } else {
+        word[index] = String(this.nextNumbers[index].getValue());
+      }
+    });
     if (!this.busted) {
-      return `Next numbers: ${this.nextNumbers[0].getValue()}, ${this.nextNumbers[1].getValue()}, ${this.nextNumbers[2].getValue()}`;
+      return `Next numbers: ${word[0]}, ${word[1]}, ${word[2]}`;
     }
     return "You busted! Start a new game?";
   }

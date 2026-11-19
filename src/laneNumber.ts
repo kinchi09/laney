@@ -5,7 +5,7 @@ export default class LaneNumber {
 
   public constructor() {
     this.value = Math.floor(Math.random() * 10) + 1;
-    if (Math.random() > .5) {
+    if (Math.random() > .7) {
       this.secret = true;
     } else {
       this.secret = false;
