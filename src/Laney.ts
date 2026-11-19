@@ -4,7 +4,7 @@ import LaneNumber from "./laneNumber.js";
 export default class Laney {
   private busted: boolean;
 
-  private lanes :Lane[];
+  private lanes: Lane[];
 
   private nextNumbers: LaneNumber[];
 
@@ -72,6 +72,7 @@ export default class Laney {
     for (let i: number = 0; i < this.lanes.length; i++) {
       if (this.lanes[i].isBusted() == true) {
         this.busted = true;
+        break;
       } else {
         this.busted = false;
       }
