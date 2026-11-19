@@ -4,8 +4,12 @@ export default class LaneNumber {
   private secret: boolean;
 
   public constructor() {
-    this.value = 0;
-    this.secret = false;
+    this.value = Math.floor(Math.random() * 10) + 1;
+    if (Math.random() > .5) {
+      this.secret = true;
+    } else {
+      this.secret = false;
+    }
   }
 
   public getValue(): number {

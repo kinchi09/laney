@@ -26,6 +26,8 @@ export default class Laney {
    */
   public placeNumberInLane(laneIndex: number): void {
     this.lanes[laneIndex].addNumber(this.nextNumbers[0]);
+    this.nextNumbers = this.nextNumbers.slice(1, 3);
+    this.nextNumbers.push(new LaneNumber());
   }
 
   /**
@@ -35,7 +37,7 @@ export default class Laney {
    */
   public getMessage(): string {
     if (!this.busted) {
-      return `${this.nextNumbers[0]} ${this.nextNumbers[1]} ${this.nextNumbers[2]}`;
+      return `Next numbers: ${this.nextNumbers[0].getValue()}, ${this.nextNumbers[1].getValue()}, ${this.nextNumbers[2].getValue()}`;
     }
     return "You busted! Start a new game?";
   }
@@ -58,6 +60,7 @@ export default class Laney {
     for (let i: number = 0; i < this.lanes.length; i++) {
       total += this.lanes[i].getTotal();
     }
+    this.isBusted();
     return total;
   }
 
@@ -67,10 +70,11 @@ export default class Laney {
    */
   public isBusted(): boolean {
     for (let i: number = 0; i < this.lanes.length; i++) {
-      if (this.lanes[i].isBusted()) {
+      if (this.lanes[i].isBusted() == true) {
         this.busted = true;
+      } else {
+        this.busted = false;
       }
-      this.busted = false;
     }
     return this.busted;
   }
