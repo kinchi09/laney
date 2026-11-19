@@ -7,6 +7,10 @@ export default class Lane {
     this.numbers = [];
   }
 
+  /**
+   * adds a number
+   * @param number the number to be added
+   */
   public addNumber(number: LaneNumber): void {
     this.numbers.push(number);
   }
@@ -19,6 +23,10 @@ export default class Lane {
     return total;
   }
 
+  /**
+   * tells if a lane is busted
+   * @returns true or false
+   */
   public isBusted(): boolean {
     return this.getTotal() > 70;
   }

@@ -12,6 +12,10 @@ export default class LaneNumber {
     return this.value;
   }
 
+  /**
+   * a
+   * @returns a
+   */
   public isSecret(): boolean {
     return this.secret;
   }
