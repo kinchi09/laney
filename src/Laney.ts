@@ -1,7 +1,21 @@
+import Lane from "./lane.js";
+import LaneNumber from "./laneNumber.js";
 
 export default class Laney {
-  public constructor(numberOfLanes: number = 3) {
+  private busted: boolean;
 
+  private lanes :Lane[];
+
+  private nextNumbers: LaneNumber[];
+
+  public constructor(numberOfLanes: number = 3) {
+    this.busted = false;
+    this.lanes = [];
+    this.nextNumbers = [];
+    for (let i: number = 0; i < numberOfLanes; i++) {
+      this.lanes.push(new Lane());
+      this.nextNumbers.push(new LaneNumber());
+    }
   }
 
   /**
@@ -11,7 +25,7 @@ export default class Laney {
    * @returns void
    */
   public placeNumberInLane(laneIndex: number): void {
-
+    this.lanes[laneIndex].addNumber(this.nextNumbers[0]);
   }
 
   /**
@@ -20,6 +34,9 @@ export default class Laney {
    * @returns string
    */
   public getMessage(): string {
+    if (!this.busted) {
+      return `${this.nextNumbers[0]} ${this.nextNumbers[1]} ${this.nextNumbers[2]}`;
+    }
     return "You busted! Start a new game?";
   }
 
@@ -29,7 +46,7 @@ export default class Laney {
    * @returns number
    */
   public getLaneTotal(laneIndex: number): number {
-    return 0;
+    return this.lanes[laneIndex].getTotal();
   }
 
   /**
@@ -37,7 +54,11 @@ export default class Laney {
    * @returns number
    */
   public getTotal(): number {
-    return 0;
+    let total: number = 0;
+    for (let i: number = 0; i < this.lanes.length; i++) {
+      total += this.lanes[i].getTotal();
+    }
+    return total;
   }
 
   /**
@@ -45,6 +66,12 @@ export default class Laney {
    * @returns boolean
    */
   public isBusted(): boolean {
-    return false;
+    for (let i: number = 0; i < this.lanes.length; i++) {
+      if (this.lanes[i].isBusted()) {
+        this.busted = true;
+      }
+      this.busted = false;
+    }
+    return this.busted;
   }
 }
